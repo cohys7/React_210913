@@ -1,13 +1,15 @@
 
+// ES2015 => 브라우저가 아직 지원하지 않음.
+export let num = 10.25;
 
-let num = 10.25;
-
-function onAdd(x, y) {
+export function onAdd(x, y) {
     return x + y;
 }
 
-function longNameFunction() {
+export function longNameFunction() {
     return 'longNameFunction';
 }
+
+// console.log(num);
 
 

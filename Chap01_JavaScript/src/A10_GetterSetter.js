@@ -20,11 +20,29 @@ class Jumsu {
         return this._name;
     }
 
+    // getter method
+    get kor() {
+        return this._kor;
+    };
+
+    // setter method
+    set kor(kor) {
+        this._kor = kor;
+    }
+
 };
 
 
 let nolbu = new Jumsu('Nolbu', 100, 90);
 console.log(nolbu._name);                       // Nolbu
+console.log(nolbu.onTotal());
+console.log(nolbu.getName());
+
+// getter, setter 메서드는 정의는 함수지만 사용은 프로퍼티처럼 사용한다
+console.log(nolbu.kor);
+nolbu.kor = 50;
+// nolbu.kor(50);
+console.log(nolbu.kor);
 
 
 
