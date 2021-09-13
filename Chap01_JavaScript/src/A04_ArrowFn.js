@@ -34,6 +34,20 @@
 
     // => 뒤가 실행 구문이면 리턴하지 않고 바로 실행만 한다.
     let onDiv2 = (x, y) => console.log( `${x} * ${y} = ${x * y}` );
-    onDiv2(10, 2)
+    onDiv2(10, 2);
+
+    // 매개 변수가 없는 경우는 ()를 생략할 수 없다.
+    let noPrams = () => 10 ** 2;
+    console.log(noPrams());
+
+    // 매개변수가 1개인 경우는 ()를 생략할 수 있다. ()를 사용해도 됨. 단지 생략이 가능.
+    let onDouble = x => x ** 3;
+    console.log(onDouble(2));
+
+    // 매개변수에 기본 값을 할당할 수 있다. 일반 함수도 가능.
+    let initFunc = (x = 10, y = 20) => {
+        return x * y;
+    };
+    console.log(initFunc())
 
 })();
