@@ -10,7 +10,11 @@ pxp13716@gmail.com
     -g는 이 컴퓨터 어느 위치에서든지 사용할 수 있도록 Global 영역에 설치된다.
     create-react-app는 리엑트 프로젝트를 생성하는 툴.
 
-    npm i -g create-react-app 
+    npm i -g create-react-app       => 최신 버전 설치
+    npm i -g create-react-app@3     => 보일러플레이트의 3의 마지막 버전이 설치됨.
+
+삭제
+    npm un -g create-react-app
 
 버전 확인
     create-react-app --version

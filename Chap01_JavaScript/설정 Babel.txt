@@ -7,6 +7,8 @@ JavaScript
     MDN:                https://developer.mozilla.org/ko/docs/Web/JavaScript
     babel:              https://babeljs.io/
     babel plugin:       https://babeljs.io/docs/en/plugins/
+
+    babel try it default setting => defaults, not ie 11, not ie_mob 11
     
 
 VSCode plugin
@@ -27,11 +29,14 @@ VSCode plugin
 
 Babel 작업 설정
 
+Chap01_JavaScript 폴더를 오른쪽 마우스 클릭 => 도스 창 열기.
+dir => src 폴더가 보여야 한다.
+
 1. package.json 파일 생성
     npm init -y
 
 
-2. babel 모듈 설치 v7 - [Global]
+2. babel 모듈 설치 v7 - [Global] 필요에 따라 설치 (설치 안함)
     npm i -g @babel/core @babel/cli
 
 
@@ -40,10 +45,10 @@ Babel 작업 설정
         npm i -D @babel/core @babel/cli
 
     2) ES5로 변환 모듈
-        npm i -D @babel/preset-env
+        npm i -D @babel/preset-env          => es5로 변환
 
     3) ES 2017 모듈
-        npm i -D @babel/preset-es2017
+        npm i -D @babel/preset-es2017       => ES2017
 
 
 4. babel plugin은 필요에 따라 설치
@@ -83,7 +88,10 @@ Babel 작업 설정
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "babel src -d dist"
     },
-        
+
+
+    실행 => npm run build  
+
 
 7. module 재 설치. package.json 파일이 있는 경로에서 실행한다.
     npm i
