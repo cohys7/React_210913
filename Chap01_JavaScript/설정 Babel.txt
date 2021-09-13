@@ -17,9 +17,13 @@ VSCode plugin
     Bracket Pair Colorizer
     Material Icon Theme
 
+
 기본 셀이 cmd로 변경되지 않는 경우
     https://hianna.tistory.com/349
-    
+
+    환경 설정에서
+    "terminal.integrated.shell.windows": "cmd.exe"      => windows의 경우
+    "terminal.integrated.defaultProfile.osx": "zsh"     => Mac의 경우
 
 Babel 작업 설정
 
