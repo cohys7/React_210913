@@ -1,7 +1,7 @@
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export class A06PureComponent extends Component {
+export class A06PureComponent extends PureComponent {
     
     constructor(props){
         super(props);
@@ -11,6 +11,16 @@ export class A06PureComponent extends Component {
             ary: ['React', 'Angular', 'Vue']
         }
     }
+
+    /*
+    // PureComponent는 Data를 비교하는 shouldComponentUpdate가 이미 정의되어 있으므로 재 정의하면 에러 
+    shouldComponentUpdate(props, state) {
+        console.log(props, state);
+        console.log(state, this.state);
+        if(state.name === this.state.name) return false;
+        else return true;
+    }
+    */
 
     changeName = () => {
         this.setState({name: 'NolBu'});

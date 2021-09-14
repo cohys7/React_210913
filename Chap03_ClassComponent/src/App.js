@@ -5,6 +5,10 @@ import A01ClassProps from './components/A01ClassProps'
 import A02ClassState from './components/A02ClassState'
 import A03ClassEvent from './components/A03ClassEvent'
 import A04CreateDOM from './components/A04CreateDOM'
+import A05PureComponent from './components/A05PureComponent'
+import A06ShallowEqual from './components/A06ShallowEqual'
+import A07LifeCycle from './components/A07LifeCycle'
+import A08HigherOrderComp from './components/A08HigherOrderComp'
 
 function App() {
 
@@ -16,8 +20,16 @@ function App() {
         <div className="card-body">
             <h1>Chap03 Class Component</h1>
 
+            <A08HigherOrderComp /><br />
+
+            <A07LifeCycle color="black" isChecked={true} /><br />
+
+            <A06ShallowEqual /><br />
+
+            <A05PureComponent /><br />
+
             <A04CreateDOM /><br />
-            
+
             <A03ClassEvent /><br />
 
             <A02ClassState /><br />
