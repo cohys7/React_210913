@@ -12,6 +12,7 @@ export class A09HigherOrderComp extends Component {
                 props.name: {this.props.name}<br />
                 props.obj: {this.props.obj.name}<br />
                 age: {this.props.age}<br />
+                <button onClick={ () => this.props.changeAge() }>Click</button>
             </div>
         )
     }

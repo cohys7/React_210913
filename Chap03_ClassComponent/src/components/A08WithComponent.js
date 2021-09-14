@@ -23,8 +23,7 @@ function A08WithComponent(Comp, params) {
             return (
                 <div>
                     <h5>With Component: {params}</h5>
-                    <Comp name={this.name} obj={obj} age={this.state.age}
-                        chagneAge={this.chagneAge} />
+                    <Comp name={this.name} obj={obj} age={this.state.age} changeAge={this.changeAge} />
                 </div>
                 
             )
