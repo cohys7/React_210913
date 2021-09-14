@@ -7,7 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="text/javascript">
-        
+        function btn02Click(evt) {
+            console.log('button02 clicked', evt);
+        }
+
+        function btn03Click(evt) {
+            console.log('button03 clicked', evt);
+        }
+
+        function btn04Click(evt, num) {
+            console.log('button03 clicked', num);
+            console.log(evt.target);        // Event가 발생된 대상 
+        }
+
+        // window.onload = function() {}
+        function onLoadEvent(evt) {
+            const btn03 = document.getElementById('btn03');
+            btn03.addEventListener('click', btn03Click)
+
+            const btn04 = document.getElementById('btn04');
+            btn04.addEventListener('click', (evt) => {
+                btn04Click(evt, 10)
+            })
+        }
+        window.addEventListener('load', onLoadEvent);
     </script>
 </head>
 <body>
@@ -15,8 +38,8 @@
     <div>
         <h1>JavaScript Event</h1>
 
-        <button name="button 01">Btn 01</button>
-        <button name="button 02">Btn 02</button>
+        <button name="button 01" onclick="console.log('button 01 clicked')">Btn 01</button>
+        <button name="button 02" onclick="btn02Click(event)">Btn 02</button>
         <button name="button 03" id="btn03">Btn 03</button>
         <button name="button 04" id="btn04">Btn 04</button>
     </div>

@@ -29,16 +29,54 @@ class A02ClassState extends Component {
             strict mode => undefined
         }
     })();
+
+    "use strict"
+    {
+        fileName: 'A',
+        state: {
+            ..
+        },
+        // this.onAdd => 존재는 한다. 
+        function() onAdd {
+            this => window or undefied(use strict mode)
+            this.fileName => undefined
+        },
+        changeName: function() {
+            this => 현재 {} 객체를 참조
+        }
+        innerFunc: onAdd.bind(this) => innerFun == onAdd 형태지만 innerFunc 내부의 this는 현재 {}를 참조로 변경된 함수가 된다.
+    }
     */
 
-    changeFileName = function() {
+    changeFileName() {
         // this => window
         console.log('changefile: ', this);
         this.fileName = 'New FileName';
+        console.log(this.fileName);
     }
-    changeName = function() {
+    changeName() {
         console.log('changeName');
-        
+        this.setState( {name: 'BangJa' } )
+    }
+
+    // Arrow 함수는 항상 자신의 객체를 this로 참조한다.
+    changeAge = () => {
+        this.setState({age: 100})
+    }
+
+    addArray = (num) => {
+        // this.setState( {ary: this.state.ary.push(num)} );        // Error. 실질적인 주소값이 변경 안됨
+        this.setState( {ary: this.state.ary.concat(num)} );
+    }
+    updateArray = (index, value) => {
+        // this.setState( {ary: this.state.ary[index] = value} )    // Error
+        const newAry = this.state.ary.map( (item, i) => index === i ? value : item );
+        this.setState( {ary: newAry} )
+    }
+    deleteArray = (index) => {
+        // this.state.ary.splice(index, 1);
+        const newAry = this.state.ary.filter( (item, i) => index !== i );
+        this.setState( {ary: newAry} );
     }
 
     render() {
@@ -51,13 +89,28 @@ class A02ClassState extends Component {
                     Name: {this.state.name} <br />
                     Age: {this.state.age}<br />
                     User: {this.state.user.name} / {this.state.user.age} / {this.state.user.address}<br />
-                    Array: {this.state.ary[0]} / {this.state.ary[1]} / {this.state.ary[5]}<br />
+                    Array: {this.state.ary[0]} / {this.state.ary[1]} / {this.state.ary[3]}<br />
                     isChecked: {this.state.isChecked ? 'TRUE' : 'FALSE'}
+                </div>
+
+                <div>
+                    { this.state.ary.map( (item, index) => {
+                        return <span key={index}>{item} </span>
+                    })}
                 </div>
 
                 <div>
                     <button onClick={this.changeFile}>FileName</button>
                     <button onClick={this.changeNameThis}>Name</button>
+                    <button onClick={() => this.changeAge()}>Age</button>
+
+                    <button onClick={ () => this.addArray( Math.ceil(Math.random() * 100) ) }>Add Array</button>
+                    <button onClick={ () => this.updateArray(0, 1000) }>Update Array</button>
+                    <button onClick={ () => this.deleteArray(2) }>Delete Array</button>
+
+                    <button onClick={ () => this.addArray( Math.ceil(Math.random() * 100) ) }>Add Object</button>
+                    <button onClick={ () => this.updateArray(0, 1000) }>Update Object</button>
+                    <button onClick={ () => this.deleteArray(2) }>Delete Object</button>
                 </div>
             </div>
         )
