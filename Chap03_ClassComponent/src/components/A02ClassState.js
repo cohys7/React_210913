@@ -79,6 +79,37 @@ class A02ClassState extends Component {
         this.setState( {ary: newAry} );
     }
 
+    /*
+        const obj = {
+            name: 'NolBu',
+            'age': 30
+        }
+        const num = 'age';
+        console.log( obj.num ) => obj.'age'
+        console.log( obj.num ) => obj['age']
+        console.log( obj.num ) => obj[num]
+    */
+    addObject = (key, value) => {
+        // this.state.user[key] = value;
+        const newObj = {...this.state.user, [key]: value};
+        this.setState( {user: newObj} )
+    }
+
+    updateObject = (key, value) => {
+        // this.state.user[key] = value;
+        const newObj = {...this.state.user, [key]: value};
+        this.setState( {user: newObj} )
+    }
+
+    deleteObject = (key) => {
+        // const newObj = {...this.state.user, [key]: ''};
+        // this.setState( {user: newObj} )
+
+        delete this.state.user[key];            // 해당 키 지우고 
+        const newObj = {...this.state.user};    // 지워진 원판을 토대로 새로운 객체 생성
+        this.setState( {user: newObj} )         // 대입
+    }
+
     render() {
         return (
             <div>
@@ -108,9 +139,9 @@ class A02ClassState extends Component {
                     <button onClick={ () => this.updateArray(0, 1000) }>Update Array</button>
                     <button onClick={ () => this.deleteArray(2) }>Delete Array</button>
 
-                    <button onClick={ () => this.addArray( Math.ceil(Math.random() * 100) ) }>Add Object</button>
-                    <button onClick={ () => this.updateArray(0, 1000) }>Update Object</button>
-                    <button onClick={ () => this.deleteArray(2) }>Delete Object</button>
+                    <button onClick={ () => this.addObject('address', 'Seoul') }>Add Object</button>
+                    <button onClick={ () => this.updateObject('address', 'Busan') }>Update Object</button>
+                    <button onClick={ () => this.deleteObject('address') }>Delete Object</button>
                 </div>
             </div>
         )

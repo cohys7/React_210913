@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import A01ClassProps from './components/A01ClassProps'
 import A02ClassState from './components/A02ClassState'
+import A03ClassEvent from './components/A03ClassEvent'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
         <div className="card-body">
             <h1>Chap03 Class Component</h1>
 
+            <A03ClassEvent /><br />
+            
             <A02ClassState /><br />
 
             1. 상위 컴퍼넌트에서 하위 컴퍼넌트에 테이터를 전달: 속성 형태로 사용한다 <br />
