@@ -15,7 +15,8 @@ function A08WithComponent(Comp, params) {
             this.state = {
                 age: 10,
             }
-        }
+        };
+        
         changeAge = () => this.setState( {age: 100} )
 
         render() {
