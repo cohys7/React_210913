@@ -33,7 +33,11 @@ function Root() {
 }
 */
 
+import './App.css';
+
 import A01Comp from './components/A01Component'
+import A02ClassComp from './components/A02ClassComp'
+import A03Fragment from './components/A03Fragment'
 
 function MakeDOM() {
     return (
@@ -54,16 +58,29 @@ function MakeDOM() {
 // }
 
 function Root() {
+    const name = 'NolBu';
+    const user = { name: 'HungBu', age: 20 };
+    const ary = [10, 20];
+    const onPlus = function(x, y) {
+        return `${x} + ${y} = ${x + y}`;
+    };
+
     return (
-        <div>
+        // 자사스크립트에서 사용하는 DOM 속성명을 사용한다. class => className
+        <div className="space">
             <h3>함수의 리턴값을 사용자정의 태그로 만들어 반환해 준다</h3>
+            Name: {name} <br />
+            User: {user.name} / {user.age + 100} / {user.address} <br />
+            Array: {ary[0]} / {ary[1]} / {ary[2]}<br />
+            Func: {onPlus(10, 20)}<br />
+
+            <A03Fragment /><br />
+            <A02ClassComp /><br />
             <MakeDOM />
             <A01Comp />
         </div>
     )
 }
-
-
 export default Root;
 
 /*
