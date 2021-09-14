@@ -1,7 +1,22 @@
 
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 
 export class A03ClassEvent extends Component {
+
+    constructor() {
+        super();
+
+        this.nameRef = createRef();     // JSX의 DOM 요소와 연결된다.
+        this.ageRef = createRef();      // 함수 컴퍼넌트의 경우는 useRef()라는 Hook을 이용한다.
+    }
+
+    // window.onload와 마찬가지로 모든 DOM 요소가 화면에 출력된 후에 발생하는 이벤트
+    componentDidMount() {
+        // console.log(this.nameRef.current);
+        // JavaScript의 대상 객체를 ref의 current로 참조 가능
+        this.nameRef.current.style.border = '1px solid orange';
+        this.nameRef.current.focus();
+    }
 
     state = {
         name: 'NolBu',
@@ -25,6 +40,7 @@ export class A03ClassEvent extends Component {
     
     changeString = (evt) => this.setState( { [evt.target.name]: evt.target.value} );
     changeNumber = (evt) => {
+        // evt.preventDefault();
         let value = Number(evt.target.value);
         if(isNaN(value)) value = 0;     // throw new Error('숫자 형식이 아닙니다');
         this.setState( { [evt.target.name]: value} );
@@ -41,6 +57,30 @@ export class A03ClassEvent extends Component {
         this.setState( {language: newSet} );
     }
 
+    changeSelectBox = (evt) => {
+        const elem = evt.target;        // selectBox
+        // console.log(elem.selectedOptions);
+        const value = [...elem.selectedOptions].map( item => item.value );
+        this.setState( {four: value} );
+    }
+
+    sendData = (evt) => {
+        evt.preventDefault();       // submit이 되면 지정된 페이지에 값을 전송하는 기본 기능을 취소해라 
+        // console.log(this.state);
+
+        const value = {
+            ...this.state,
+            language: Array.from(this.state.language)       // Set 객체를 Array 객체로 변환.
+        }
+        console.log(JSON.stringify(value));
+
+        // JSON.stringify => JavaScript의 object를 json 객체로 변환
+        // JSON.parse => object를 JavaScript 객체로 변환
+
+        this.ageRef.current.value = 0;
+
+    }
+
     render() {
         return (
             <div>
@@ -49,10 +89,10 @@ export class A03ClassEvent extends Component {
                 <form>
                     form 요소의 value 속성은 변경을 할 목적으로 기술. 변경하는 이벤트를 함깨 기술하지 않으면 에러.<br />
                     Name: {this.state.name}
-                        <input type="text" name="name" className="form-control" 
+                        <input type="text" name="name" className="form-control" ref={this.nameRef}
                                         value={this.state.name} onChange={this.changeString} />
                     Age: {this.state.age + 100} 
-                        <input type="text" name="age" className="form-control" 
+                        <input type="text" name="age" className="form-control" ref={this.ageRef}
                                         value={this.state.age} onChange={this.changeNumber} />
                     Date: {this.state.date}
                         <input type="date" name="date" className="form-control" 
@@ -100,21 +140,23 @@ export class A03ClassEvent extends Component {
                         </div>
 
                     SelectBox: {this.state.baseball}<br/>
-                        <select name="baseball" className="form-control" >
+                        <select name="baseball" className="form-control" 
+                                    value={this.state.baseball} onChange={this.changeString}>
                             <option>NC</option>
                             <option>두산</option>
                             <option>엘지</option>
                         </select>
                     
                     SelectBox Multi: {Array.from(this.state.four) }<br />
-                        <select name="four" multiple size="3" className="form-control" >
+                        <select name="four" multiple size="3" className="form-control" 
+                                value={this.state.four} onChange={this.changeSelectBox}>
                             <option>NC</option>
                             <option>두산</option>
                             <option>엘지</option>
                         </select>
                     <br />
 
-                    <button type="submit">SEND</button>
+                    <button type="submit" onClick={this.sendData}>SEND</button>
                 </form>
             </div>
         )

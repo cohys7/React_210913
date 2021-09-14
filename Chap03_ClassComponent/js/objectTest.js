@@ -11,4 +11,6 @@ console.log( obj['name'] )
 
 const value = 'name';
 
-console.log(obj.value);     // => obj.'name'
+// 이건 에러
+// console.log(obj.value);     // => obj.'name'
+console.log( obj[value] );
