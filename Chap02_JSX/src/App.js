@@ -34,10 +34,12 @@ function Root() {
 */
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
 
 import A01Comp from './components/A01Component'
 import A02ClassComp from './components/A02ClassComp'
 import A03Fragment from './components/A03Fragment'
+import A04JQuery from './components/A04JQuery'
 
 function MakeDOM() {
     return (
@@ -70,10 +72,22 @@ function Root() {
         <div className="space">
             <h3>함수의 리턴값을 사용자정의 태그로 만들어 반환해 준다</h3>
             Name: {name} <br />
+            리퍼런스 타입은 없는 속성을 기술해도 에러로 표시되지 않는다. <br />
+            나중에 추가되면 값은 제대로 표시된다.<br />
             User: {user.name} / {user.age + 100} / {user.address} <br />
+
+            배열도 없는 요소값을 출력해도 에러 아님. 나중에 추가되면 제대로 표시됨<br />
             Array: {ary[0]} / {ary[1]} / {ary[2]}<br />
             Func: {onPlus(10, 20)}<br />
 
+            <button className="btn btn-primary">Click</button>
+            <br />
+            <img src="images/robot.jpeg" alt="로봇 이미지" />
+            <br />
+            <br />
+            
+
+            <A04JQuery /><br />
             <A03Fragment /><br />
             <A02ClassComp /><br />
             <MakeDOM />
