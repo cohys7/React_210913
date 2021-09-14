@@ -12,13 +12,18 @@ function A08WithComponent(Comp, params) {
         constructor() {
             super();
             this.name = 'HungBu'
+            this.state = {
+                age: 10,
+            }
         }
+        changeAge = () => this.setState( {age: 100} )
 
         render() {
             return (
                 <div>
                     <h5>With Component: {params}</h5>
-                    <Comp name={this.name} obj={obj} />
+                    <Comp name={this.name} obj={obj} age={this.state.age}
+                        chagneAge={this.chagneAge} />
                 </div>
                 
             )

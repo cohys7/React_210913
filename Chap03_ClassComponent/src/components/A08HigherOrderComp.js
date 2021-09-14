@@ -10,7 +10,9 @@ export class A09HigherOrderComp extends Component {
             <div>
                 <h3>A08 Higher Order Component</h3>
                 props.name: {this.props.name}<br />
-                props.obj: {this.props.obj.name}
+                props.obj: {this.props.obj.name}<br />
+                age: {this.props.age}<br />
+                <button onClick={this.props.changeAge}>Change</button>
             </div>
         )
     }
