@@ -18,7 +18,8 @@ function A04CreateDOM() {
 
     const changeValue = (evt) => setData({...data, [evt.target.name]: evt.target.value});
     const addTeam = () => setBaseObject(baseObject.concat({id: 4, team: '삼성', value:"Samsung"}))
-    const showHide = () => setData({...data, isChecked: !data.isChecked})
+    const showHide = () => setData({...data, isChecked: !data.isChecked});
+    const makeDOM = () => baseArray.map( (item, index) => <option key={index}>{item}</option> );
 
     return (
         <div>
@@ -27,13 +28,13 @@ function A04CreateDOM() {
             SelectBox: {data.teamOne}<br/>
             <select name="teamOne" className="form-control" onChange={changeValue}>
                 <option>선택해주세요</option>
-                
+                { baseArray.map( (item, index) => <option key={index}>{item}</option>)}
             </select>
 
             SelectBox: {data.teamTwo}<br/>
             <select name="teamTwo" className="form-control" onChange={changeValue}>
                 <option value="">선택해주세요</option>
-                
+                { makeDOM() }
             </select>
 
             <table className="table">
@@ -43,18 +44,25 @@ function A04CreateDOM() {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    { baseObject.map( (item) => {
+                        return (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.team}</td>
+                                <td>{item.value}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
 
-            
+            { data.isChecked && 
                 <div className="input-group">
                     <input type="text" className="form-control" />
                     <button className="btn btn-outline-primary btn-sm">ADD</button>
                 </div>
-            
+            }
             <br />
-            
             <button className="btn btn-outline-primary btn-sm" onClick={addTeam}>ADD TEAM</button>
             <button className="btn btn-outline-primary btn-sm" onClick={showHide}>{data.isChecked ? 'HIDE' : 'SHOW'}</button>
         </div>
