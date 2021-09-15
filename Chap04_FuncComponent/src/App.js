@@ -7,6 +7,9 @@ import A03FuncEvent from './components/A03FuncEvent'
 import A04CreateDOM from './components/A04CreateDOM'
 import A05Hook from './components/A05Hook'
 import A06Hook from './components/A06Hook'
+import A07HigherOrder from './components/A07HigherOrder'
+import A08Immer from './components/A08Immer'
+import A09Currency from './components/A09Currency'
 
 function App() {
     const user = {name: 'HungBu', age: 20};
@@ -16,6 +19,12 @@ function App() {
   return (
     <div className="card-body">
         <h1>Chap04 Function Component</h1>
+
+        <A09Currency /><br />
+
+        <A08Immer /><br />
+
+        <A07HigherOrder color="orange" /><br />
 
         <A06Hook /><br />
 
