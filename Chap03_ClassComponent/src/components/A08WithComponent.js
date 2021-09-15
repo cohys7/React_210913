@@ -12,6 +12,7 @@ function A08WithComponent(Comp, params) {
         constructor() {
             super();
             this.name = 'HungBu'
+            
             this.state = {
                 age: 10,
             }

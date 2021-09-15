@@ -9,6 +9,7 @@ import A05PureComponent from './components/A05PureComponent'
 import A06ShallowEqual from './components/A06ShallowEqual'
 import A07LifeCycle from './components/A07LifeCycle'
 import A08HigherOrderComp from './components/A08HigherOrderComp'
+import A09Currency from './components/A09Currency'
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
     return (
         <div className="card-body">
             <h1>Chap03 Class Component</h1>
+
+            <A09Currency /><br />
 
             <A08HigherOrderComp /><br />
 
