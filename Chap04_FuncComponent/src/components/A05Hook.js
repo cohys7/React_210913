@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 const A05Hook = () => {
 
@@ -31,6 +31,22 @@ const A05Hook = () => {
         setList( (list) => list.concat(avg) )
     }, [avg]);
 
+    // useCallback => event listener 관리
+    // useEffect => lifeCycle 관리
+    // useState => state 변수 등록 및 수정
+    // useRef => DOM과 연결.
+    // useMemo => 사용자 정의 함수를 관리
+    const getAverage = (ary) => {
+        console.log('계산중...');
+        if(ary.length === 0) return 0;
+        const total = ary.reduce( (x, y) => x + y );
+        return total / ary.length;
+    }
+
+    const getAverageMemo = useMemo( () => {
+        return getAverage(list);
+    }, [list])
+
 
     // useEffect
     useEffect( () => {
@@ -61,7 +77,7 @@ const A05Hook = () => {
                 Today: { today.toLocaleString() }<br />
                 <br />
 
-                Avg: {avg}
+                Avg: {avg} / {getAverageMemo}
                     <div className="input-group">
                         <input type="text" name="avg" className="form-control"
                             value={avg} onChange={changeAvg} />
