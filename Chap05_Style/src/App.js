@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
+
+import A01Style from './components/A01Style'
+import A02StyleModule from './components/A02StyleModule'
+import A03Classnames from './components/A03Classnames'
+import A04StyledComponent from './components/A04StyledComponent'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="card-body">
+        <h1>Chap05 Style</h1>
+
+        <A04StyledComponent /><br />
+
+        <A03Classnames /><br />
+
+        <A02StyleModule /><br />
+
+        <A01Style />
     </div>
   );
 }
