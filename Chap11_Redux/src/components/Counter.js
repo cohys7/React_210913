@@ -1,14 +1,28 @@
 import React from 'react'
+import {increaseAction, decreaseAction} from './../modules/counterR';
+import { connect } from 'react-redux'       // HoC
 
 function Counter(props) {
 
+    const {counter, moduleName, increase, decrease} = props;
     return (
         <div>
-            <h3>Counter: </h3>
-            <button>+</button>        
-            <button>-</button> 
+            <h3>{moduleName} / Counter: {counter}</h3>
+            <button onClick={ () => increase(2) }>+</button>        
+            <button onClick={decrease}>-</button> 
         </div>
     )
 }
 
-export default Counter
+export default connect(
+    state => {
+        return {
+            counter: state.cnt,
+            moduleName: state.reduxName
+        }
+    },
+    dispach => ({
+        increase: (num) => dispach(increaseAction(num)),
+        decrease: () => dispach(decreaseAction())
+    })
+)(Counter)
