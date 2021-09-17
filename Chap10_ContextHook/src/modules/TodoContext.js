@@ -28,7 +28,7 @@ function TodoListProvider(props) {
 
     const cnt = useRef(6);
 
-    const addTodo = useContext( (text) => {
+    const addTodo = useCallback( (text) => {
         const todo = {id: cnt.current++, text, done: false};
         setTodoList( todoList => todoList.concat(todo) );
     }, []);
@@ -53,6 +53,6 @@ function TodoListProvider(props) {
        </TodoContext.Provider>
     )
 }
-const TodoListConsumer = TodoContext.Consumer
+const TodoListConsumer = TodoContext;
 
 export { TodoListProvider, TodoListConsumer }

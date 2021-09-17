@@ -1,5 +1,5 @@
 
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { TodoListConsumer } from './../modules/TodoContext'
 
 export const TodoForm = () => {

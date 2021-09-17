@@ -1,5 +1,5 @@
 
-import {createContext, useCallback, useContext, useRef, useState} from 'react'
+import {createContext, useCallback, useRef, useState} from 'react'
 
 const TodoContext = createContext({
     state: {
@@ -28,7 +28,7 @@ function TodoListProvider(props) {
 
     const cnt = useRef(6);
 
-    const addTodo = useContext( (text) => {
+    const addTodo = useCallback( (text) => {
         const todo = {id: cnt.current++, text, done: false};
         setTodoList( todoList => todoList.concat(todo) );
     }, []);
