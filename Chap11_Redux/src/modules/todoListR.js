@@ -19,6 +19,17 @@ const init = {
     text: ''
 }
 const todoListR = (state = init, action) => {
-    return state;
+    switch(action.type) {
+        case TODOLIST_ADDTODO:
+            return {...state}
+        case TODOLIST_UPDATETODO:
+            return {...state}
+        case TODOLIST_DELETETODO:
+            return {...state}
+        case TODOLIST_CHANGETEXT:
+            return {...state}
+        default:
+            return state;
+    }
 }
 export default todoListR;

@@ -17,8 +17,8 @@ function Counter(props) {
 export default connect(
     state => {
         return {
-            counter: state.cnt,
-            moduleName: state.reduxName
+            counter: state.counterR.cnt,
+            moduleName: state.counterR.reduxName
         }
     },
     dispach => ({
