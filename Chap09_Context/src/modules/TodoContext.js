@@ -1,0 +1,58 @@
+
+import {createContext, useRef, useState} from 'react'
+
+const TodoContext = createContext({
+    state: {
+        todoList: [],
+        text: '',
+    },
+    action: {
+        addTodo: (text) => {},
+        updateTodo: (id) => {},
+        deleteTodo: (id) => {},
+        changeText: (text) => {}
+    }
+});
+
+function makeTodo() {
+    const todos = [];
+    for(let i = 1; i < 5; i++) {
+        todos.push({id: i, text: `${i}번째 할 일`, dome: false})
+    }
+    return todos;
+}
+
+function TodoListProvider(props) {
+    const [todoList, setTodoList] = useState(makeTodo());
+    const [text, setText] = useState('');
+
+    const cnt = useRef(6);
+
+    const addTodo = (text) => {
+        const todo = {id: cnt.current++, text, done: false};
+        setTodoList( todoList.concat(todo) );
+    };
+    const updateTodo = (id) => {
+        setTodoList( todoList.map( todo => todo.id === id ? {...todo, done: !todo.done} : todo) );
+    };
+    const deleteTodo = (id) => {
+        setTodoList( todoList.filter( todo => todo.id !== id) )
+    };
+    const changeText = (text) => {
+        setText(text);
+    };
+
+    const value = {
+        state: {todoList, text},
+        action: {addTodo, updateTodo, deleteTodo, changeText}
+    }
+
+    return (
+       <TodoContext.Provider value={value}>
+           {props.children}
+       </TodoContext.Provider>
+    )
+}
+const TodoListConsumer = TodoContext.Consumer
+
+export { TodoListProvider, TodoListConsumer }
