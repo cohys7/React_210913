@@ -19,7 +19,9 @@ export const addTodoAction = (text) => {
     // state에 관련 작업은 할 수 없다 (변수 참조 안됨);
     return {type: TODOLIST_ADDTODO, payload: todo}
 }
-export const updateTodoAction = (id) => ({type: TODOLIST_UPDATETODO, payload: id})
+export const updateTodoAction = (id) => ({type: TODOLIST_UPDATETODO, payload: id});
+export const deleteTodoAction = (id) => ({type: TODOLIST_DELETETODO, payload: id});
+export const changeTextAction = (text) => ({type: TODOLIST_CHANGETEXT, payload: text})
 
 const init = {
     todoList: makeTodo(),
@@ -33,9 +35,9 @@ const todoListR = (state = init, action) => {
             const updateTodos = state.todoList.map( todo => todo.id === action.payload ? {...todo, done: !todo.done}: todo )
             return {...state, todoList: updateTodos}
         case TODOLIST_DELETETODO:
-            return {...state}
+            return {...state, todoList: state.todoList.filter( todo => todo.id !== action.payload) }
         case TODOLIST_CHANGETEXT:
-            return {...state}
+            return {...state, text: action.payload}
         default:
             return state;
     }
