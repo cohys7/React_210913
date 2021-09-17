@@ -1,0 +1,40 @@
+1. 각 Reducer를 기술
+    컴퍼넌트의 그룹별로 데이터를 공유랄 값(변수)가 있으면 정리
+    ex) CounterR, todoListR
+
+2. 각 Reducer를 통합 할 rootReducer를 작성해서 1번에서 작성한 파일을 정의한다.
+    ex) modules/index.js
+        import { combineReducers } from 'redux'
+        import counterR from './counterR'
+        import todoListR from './todoListR'
+
+        // 모든 reducer를 통합 관리.. store는 단일 스토어만 지원한다.
+        const rootReducer = combineReducers({
+            counterR, todoListR, 새로 만들면 계속 추가...
+        })
+        export default rootReducer;
+
+
+3. 단일 스토어만 지원하므로 root 태그 (App)에 적용하기 위해 index.js 파일에 스토어를 생성하고
+    2번에서 만든 index.js를 store에 등록한다
+
+        mport { createStore } from 'redux'         // Reducer 함수를 불러와 단일 store를 만들 목적
+        import { Provider } from 'react-redux'      // Context의 Provider와 동일한 역할.
+        import { composeWithDevTools } from 'redux-devtools-extension'      // 브라우저에서 store의 상태를 확인하기 위함.
+
+        import rootReducer from './modules/index'
+
+        const store = createStore(rootReducer, composeWithDevTools());
+
+        ...
+        <Provider store={store}>      {/* Context.Provider의 역할 */}
+            <App />
+        </Provider>
+
+4. 1번에서 만든 Reducer에 이벤트에 따라 처리할 로직을 구현한다.
+    action 기술 => export const xxxxAction => 
+    이에 따라 처리할 switch 구문 기술해서 state를 어떻게 변경할 것인지 정의 (함수 수정)
+
+    변수가 더 필요하면 init에 추가하고 action => case 구문 정의
+
+5. 각 컴퍼넌트에서 connect를 사용하던 hook을 사용하던 state 변수 값과 action을 불러와 적절히 이벤트 발생

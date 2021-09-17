@@ -16,7 +16,8 @@ let cnt = 6;
 
 const init = {
     todoList: makeTodo(),
-    text: ''
+    text: '',
+    
 }
 const todoListR = (state = init, action) => {
     return state;
