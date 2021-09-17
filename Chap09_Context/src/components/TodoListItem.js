@@ -12,7 +12,7 @@ function TodoListItem(props) {
             {data => (
                 <tr>
                     <td>{todo.id}</td>
-                    <td><span className={todo.id ? 'done': ''}>{todo.text}</span></td>
+                    <td><span className={todo.done ? 'done': ''}>{todo.text}</span></td>
                     <td>
                         <button className="btn btn-primary"
                             onClick={ () => data.action.updateTodo(todo.id) }>Complete</button>
