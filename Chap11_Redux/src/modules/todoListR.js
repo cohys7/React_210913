@@ -14,6 +14,13 @@ const makeTodo = () => {
 
 let cnt = 6;
 
+export const addTodoAction = (text) => {
+    const todo = {id: cnt++, text, done: false};
+    // state에 관련 작업은 할 수 없다 (변수 참조 안됨);
+    return {type: TODOLIST_ADDTODO, payload: todo}
+}
+export const updateTodoAction = (id) => ({type: TODOLIST_UPDATETODO, payload: id})
+
 const init = {
     todoList: makeTodo(),
     text: ''
@@ -21,9 +28,10 @@ const init = {
 const todoListR = (state = init, action) => {
     switch(action.type) {
         case TODOLIST_ADDTODO:
-            return {...state}
+            return { ...state, todoList: state.todoList.concat(action.payload) }
         case TODOLIST_UPDATETODO:
-            return {...state}
+            const updateTodos = state.todoList.map( todo => todo.id === action.payload ? {...todo, done: !todo.done}: todo )
+            return {...state, todoList: updateTodos}
         case TODOLIST_DELETETODO:
             return {...state}
         case TODOLIST_CHANGETEXT:
