@@ -1,6 +1,7 @@
 
-import { handleActions } from 'redux-actions'
+import { createAction, handleActions } from 'redux-actions'
 import axios from 'axios'
+import produce from 'immer'
 
 const GET_CONTACTLIST = "CONTACT/GET_CONTACTLIST";
 const GET_CONTACTLIST_SUCCESS = "CONTACT/GET_CONTACTLIST_SUCCESS";
@@ -17,8 +18,32 @@ const ADD_CONTACT_FAILURE = "CONTACT/ADD_CONTACT_FAILURE";
 const baseURL = 'http://localhost:8080/contacts/';
 const baseLONG = 'http://localhost:8080/contacts_long/';
 
+const getContextListActionStart = createAction(GET_CONTACTLIST)
+const getContextListActionSuccess = createAction(GET_CONTACTLIST_SUCCESS, resp => resp )
+const getContextListActionError = createAction(GET_CONTACTLIST_FAILURE, error => error.message )
 
 // Action
+export const getContextListActionAsync = () => (disparch) => {
+    disparch(getContextListActionStart())
+    axios.get(baseLONG, {params: {pageno: 1, pagesize: 10}})
+    .then(
+        (resp) => disparch( getContextListActionSuccess(resp.data) )
+    )
+    .catch(
+        (error) => disparch( getContextListActionError(error) )
+    )
+}
+
+export const getContextActionAsync = (no) => (disparch) => {
+    disparch( { type: GET_CONTACT } )
+    axios.get(baseURL + no)
+    .then(
+        (resp) => disparch( { type: GET_CONTACT_SUCCESS, payload: resp.data } )
+    )
+    .catch(
+        (error) => disparch( { type: GET_CONTACT_FAILURE, payload: error.message } )
+    )
+}
 
 
 const init = {
@@ -34,23 +59,55 @@ const init = {
 const contactR = handleActions({
     // Get List
     [GET_CONTACTLIST]: (state, action) => {
-        return ;
+        return {
+            ...state,
+            loading: {
+                ...state.loading,
+                GET_CONTACTLIST: true
+            },
+            contactList: null,
+            error: null,
+        };
     },
     [GET_CONTACTLIST_SUCCESS]: (state, action) => {
-        return ;
+        return {
+            ...state,
+            loading: {
+                ...state.loading,
+                GET_CONTACTLIST: false
+            },
+            contactList: action.payload
+        };
     },
     [GET_CONTACTLIST_FAILURE]: (state, action) => {
-        return ;
+        return {
+            ...state,
+            loading: {
+                ...state.loading,
+                GET_CONTACTLIST: false
+            },
+            error: action.payload
+        };
     },
     // Get
     [GET_CONTACT]: (state, action) => {
-        return ;
+        return produce(state, draft => {
+            draft.loading.GET_CONTACT = true;
+            draft.contact = null;
+            draft.error = null;
+        });
     },
     [GET_CONTACT_SUCCESS]: (state, action) => {
-        return ;
+        return produce(state, draft => {
+            draft.loading.GET_CONTACT = false;
+            draft.contact = action.payload;
+        });
     },
     [GET_CONTACT_FAILURE]: (state, action) => {
-        return ;
+        return produce(state, draft => {
+            draft.loading.GET_CONTACT = false;
+            draft.error = action.payload;
+        });
     },
     // Add
     [ADD_CONTACT]: (state, action) => {

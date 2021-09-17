@@ -6,7 +6,8 @@ import ContactHome from './Contact/ContactHome'
 import ContactAdd from './Contact/ContactAdd'
 import ContactUpdate from './Contact/ContactUpdate'
 import ContactGet from './Contact/ContactGet'
-import ContactGetList from './Contact/ContactGetList'
+// import ContactGetList from './Contact/ContactGetList'
+import ContactListContainer from './../containers/ContactListContainer'
 
 import Counter from './Counter'
 import Proceed from './Proceed'
@@ -19,7 +20,7 @@ function ContactApp() {
 
             <Switch>
                 <Route path="/"                 component={ContactHome}         exact/>
-                <Route path="/getContactList"   render={ () => <ContactGetList /> } />
+                <Route path="/getContactList"   render={ () => <ContactListContainer /> } />
                 <Route path="/getContact"       render={ () => <ContactGet />} />
                 <Route path="/addContact"       render={ () => <ContactAdd /> } />
                 <Route path="/updateContact"    render={ () => <ContactUpdate /> } />
