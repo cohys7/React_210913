@@ -6,9 +6,19 @@ const COUNTER_DECREASE = 'COUNTER/DECREASE';
 
 export const increaseAction = createAction(COUNTER_INCREASE, (num) => {
     num = num + 1;
+    // setTimeout( () => {
+    //     return num
+    // }, 2000);
     return num;
 });
 export const decreaseAction = createAction(COUNTER_DECREASE);
+
+export const increaseActionAsync = (num) => (dispatch) => {
+    console.log('async')
+    setTimeout( () => {
+        dispatch( increaseAction(num) );
+    }, 2000)
+}
 
 const init = {
     num: 0,
