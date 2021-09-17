@@ -1,28 +1,22 @@
 import React from 'react'
 import {increaseAction, decreaseAction} from './../modules/counterR';
-import { connect } from 'react-redux'       // HoC
+import { useDispatch, useSelector } from 'react-redux'
 
 function Counter(props) {
 
-    const {counter, moduleName, increase, decrease} = props;
+    // const {counter, moduleName, increase, decrease} = props;
+    const moduleName = useSelector(state => state.counterR.reduxName);
+    const counter = useSelector(state => state.counterR.cnt);
+
+    const dispatch = useDispatch();
+
     return (
         <div>
             <h3>{moduleName} / Counter: {counter}</h3>
-            <button onClick={ () => increase(2) }>+</button>        
-            <button onClick={decrease}>-</button> 
+            <button onClick={ () => dispatch(increaseAction(2)) }>+</button>        
+            <button onClick={ () => dispatch(decreaseAction()) }>-</button> 
         </div>
     )
 }
 
-export default connect(
-    state => {
-        return {
-            counter: state.counterR.cnt,
-            moduleName: state.counterR.reduxName
-        }
-    },
-    dispach => ({
-        increase: (num) => dispach(increaseAction(num)),
-        decrease: () => dispach(decreaseAction())
-    })
-)(Counter)
+export default Counter;

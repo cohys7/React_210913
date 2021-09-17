@@ -1,26 +1,26 @@
 
 import React, { useRef } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { addTodoAction, changeTextAction } from './../modules/todoListR'
 
 function TodoForm(props) {
 
     const inputRef = useRef();
-
-    const { text, addTodo, changeText } = props;
+    const text = useSelector( state => state.todoListR.text);
+    const dispatch = useDispatch();
 
     const sendData = (evt) => {
         evt.preventDefault();
         inputRef.current.focus();
-        addTodo(text);
-        changeText('');
+        dispatch(addTodoAction(text));
+        dispatch(changeTextAction(''));
     }
 
     return (
         <form>
             <div className="input-group">
                 <input type="text" className="form-control" ref={inputRef} 
-                    value={text} onChange={ (evt) => changeText(evt.target.value) } />
+                    value={text} onChange={ (evt) => dispatch(changeTextAction(evt.target.value)) } />
                 <div className="input-group-append">
                     <button type="submit" className="btn btn-primary mr-1" onClick={sendData} >Submit</button>
                 </div>
@@ -28,12 +28,4 @@ function TodoForm(props) {
         </form>
     )
 }
-export default connect(
-    state => ({
-        text: state.todoListR.text
-    }),
-    dispatch => ({
-        addTodo: (text) => dispatch(addTodoAction(text)),
-        changeText: (text) => dispatch(changeTextAction(text))
-    })
-)(TodoForm)
+export default TodoForm

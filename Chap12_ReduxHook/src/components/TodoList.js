@@ -2,11 +2,11 @@
 import React from 'react'
 import './css/todos.css';
 import TodoListItem from './TodoListItem'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-function Todolist(props){
+function Todolist(){
 
-    const { todoList } = props;
+    const todoList = useSelector( state => state.todoListR.todoList );
     return (
         <div>
             <table className="table">
@@ -25,8 +25,4 @@ function Todolist(props){
         </div>
     )
 }
-export default connect(
-    state => ({
-        todoList: state.todoListR.todoList
-    })
-)(Todolist);
+export default Todolist
